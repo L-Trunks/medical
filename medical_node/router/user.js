@@ -22,7 +22,7 @@ router.route('/register').post(function (req, res) {
     } 
     name = 'v_'+name;
     //console.log(name)
-    param = [name,req.body.p_tel,req.body.p_password,req.body.p_houseNum];
+    let param =  [name,req.body.p_tel,req.body.p_password,req.body.p_houseNum];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -57,7 +57,7 @@ router.route('/login').post(function (req, res) {
         console.log(3)
     }
     //console.log(name)
-    param = [req.body.p_tel,req.body.p_password];
+    let param =  [req.body.p_tel,req.body.p_password];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -95,7 +95,7 @@ router.route('/forgetPass').post(function (req, res) {
         //console.log(2)
     }
     //console.log(name)
-    param = [req.body.p_password,req.body.p_tel];
+    let param =  [req.body.p_password,req.body.p_tel];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -128,7 +128,7 @@ router.route('/checkForget').post(function (req, res) {
         //console.log(2)
     }
     //console.log(name)
-    param = [req.body.p_tel];
+    let param =  [req.body.p_tel];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -162,7 +162,7 @@ router.route('/getAddress').get(function (req, res) {
     let sql;
     sql =  `select value,label from address`;
     
-    param = [req.body.p_tel,req.body.p_password];
+    let param =  [req.body.p_tel,req.body.p_password];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -188,7 +188,7 @@ router.route('/check').post(function (req, res) {
     let sql;
     sql =  `select * from patient where p_tel = ?`;
     
-    param = [req.body.p_tel];
+    let param =  [req.body.p_tel];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})

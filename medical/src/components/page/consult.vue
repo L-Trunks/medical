@@ -17,7 +17,7 @@
                     在下方留言，我会努力加快回复你的哦！
                 </div>
             </div>
-            <div v-for="item in chatContent" style="margin:5px 0;">
+            <div v-for="(item,index) in chatContent" :key="index" style="margin:5px 0;">
                 <div class="left" v-bind:class="{ right: item.classState }">
                     <div class="face">
                         <img :src="item.face | replace" alt="">
@@ -100,14 +100,15 @@
         },
         rules: {
             value: [
-                {required: true, message: '请选择要咨询的患者', trigger: 'blur'}
+                {required: true, message: '请选择要咨询的医生', trigger: 'blur'}
             ]
-        }      
+        },
+        inter:{},  
       };
     },
     mounted(){
         this.init()
-        setInterval(this.chat, 1000);
+        // this.inter = setInterval(this.chat, 1000);
     },
     filters:{
         replace (input){
@@ -116,7 +117,7 @@
        
     },
     beforeDestory(){
-        clearInterval(this.chat)
+        clearInterval(this.inter)
     },
     watch: {
         chatContent: function(){
@@ -127,7 +128,7 @@
         }
     },
     methods: {
-       
+
         init(){
             
             let chatState = this.getCookie('chatState');

@@ -57,7 +57,7 @@
             </span>
         </el-dialog>
         <div class="content" id="content">
-            <div v-for="item in chatContent" style="margin:5px 0;">
+            <div v-for="(item,index) in chatContent" :key="index" style="margin:5px 0;">
                 <div class="left" v-bind:class="{ right: item.classState }">
                     <div class="face">
                         <img :src="item.face | replace" alt="">
@@ -110,7 +110,7 @@
     },
     created(){
         this.chat()
-        setInterval(this.chat, 1000);
+        // setInterval(this.chat, 1000);
     },
     watch: {
         chatContent: function(){

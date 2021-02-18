@@ -48,7 +48,7 @@
                
                 if(id !== undefined) {
                     
-                    this.$router.push({path:'/sqztc/article',query:{id:id}});
+                    this.$router.push({path:'/medical/article',query:{id:id}});
                 }
             },
             getSearchInfo(){

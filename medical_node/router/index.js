@@ -24,7 +24,7 @@ router.route('/getDoctorInfo').post(function (req, res) {
     }
     
     
-    param = [req.body.username];
+    let param =  [req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -52,7 +52,7 @@ router.route('/getFamilyInfo').post(function (req, res) {
     let sql;
     sql =  `select id,name from patientgroup where fromLoginUser = ?`;
     
-    param = [req.body.username];
+    let param =  [req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -79,7 +79,7 @@ router.route('/getFamilyDetail').post(function (req, res) {
     let sql;
     sql =  `select * from patientgroup where id = ?`;
     
-    param = [req.body.id];
+    let param =  [req.body.id];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -112,7 +112,7 @@ router.route('/getUserInfo').post(function (req, res) {
     }
     
     
-    param = [req.body.username];
+    let param =  [req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -139,7 +139,7 @@ router.route('/search').post(function (req, res) {
     let sql;
     sql =  `SELECT * FROM toutiao WHERE n_title LIKE "%"?"%" OR n_abstract LIKE "%"?"%" `;
     
-    param = [req.body.searchValue,req.body.searchValue];
+    let param =  [req.body.searchValue,req.body.searchValue];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -165,7 +165,7 @@ router.route('/search').post(function (req, res) {
 router.route('/insertPerson').post(function (req, res) {
     let sql =  `insert into patientgroup(name,age,height,weight,history,sex,profession,fromLoginUser) values (?,?,?,?,?,?,?,?)`;
     
-    param = [req.body.name,req.body.age,req.body.height,req.body.weight,req.body.history,req.body.sex,req.body.profession,req.body.fromUser];
+    let param =  [req.body.name,req.body.age,req.body.height,req.body.weight,req.body.history,req.body.sex,req.body.profession,req.body.fromUser];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -192,7 +192,7 @@ router.route('/delPerson').post(function (req, res) {
     //console.log(req.body)
     let sql =  `delete from patientgroup where id = ?`;
     
-    param = [req.body.id];
+    let param =  [req.body.id];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -217,7 +217,7 @@ router.route('/delPerson').post(function (req, res) {
 router.route('/delAllPerson').post(function (req, res) {
     //console.log(req.body.ids)
     var sql =  `delete from patientgroup where id in (`;
-    param = [];
+    let param =  [];
     for(let i = 0;i<req.body.ids.length;i++){
         param.push(req.body.ids[i])
     }
@@ -257,7 +257,7 @@ router.route('/delAllChat').post(function (req, res) {
         sql =  `update record_group set doctorSee = false`;
         //console.log(2)
     }
-    //param = [req.body.username];
+    //let param =  [req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -282,7 +282,7 @@ router.route('/delAllChat').post(function (req, res) {
 router.route('/getAllChatNum').post(function (req, res) {
     //console.log(req.body.ids)
     var sql = `SELECT SUM(count) count FROM ( SELECT COUNT(1) count FROM record WHERE receiver =? UNION ALL SELECT COUNT(1) count FROM record WHERE send  =? ) a `;
-    param = [req.body.username,req.body.username];
+    let param =  [req.body.username,req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -307,7 +307,7 @@ router.route('/getAllChatNum').post(function (req, res) {
 router.route('/getAllOrder').post(function (req, res) {
     //console.log(req.body)
     var sql = `SELECT * FROM sq_order WHERE d_id = ? and doctor_see = true`;
-    param = [req.body.username];
+    let param =  [req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -334,7 +334,7 @@ router.route('/getAllOrder').post(function (req, res) {
 router.route('/getMyOrderInfo').post(function (req, res) {
     console.log(req.body)
     var sql = `SELECT * FROM sq_order WHERE send_order = ?`;
-    param = [req.body.username];
+    let param =  [req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -361,7 +361,7 @@ router.route('/getMyOrderInfo').post(function (req, res) {
 router.route('/updateFamilyDetail').post(function (req, res) {
     let sql =  `update patientgroup set name=?,age=?,height=?,weight=?,history=?,sex=?,profession=? where id=?`;
     
-    param = [req.body.name,req.body.age,req.body.height,req.body.weight,req.body.history,req.body.sex,req.body.profession,req.body.id];
+    let param =  [req.body.name,req.body.age,req.body.height,req.body.weight,req.body.history,req.body.sex,req.body.profession,req.body.id];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -394,7 +394,7 @@ router.route('/updateFace').post(function (req, res) {
         //console.log(2)
     }
     
-    param = [req.body.face,req.body.phone];
+    let param =  [req.body.face,req.body.phone];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -425,7 +425,7 @@ router.route('/updatePassword').post(function (req, res) {
         sql =  `update doctor set d_password=? where d_tel=?`;
         //console.log(2)
     }
-    param = [req.body.password,req.body.phone];
+    let param =  [req.body.password,req.body.phone];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -450,7 +450,7 @@ router.route('/complateOrder').post(function (req, res) {
     //console.log(req.body)
     let sql =  `update sq_order set order_state='true' where id=?`;
     
-    param = [req.body.id];
+    let param =  [req.body.id];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -476,7 +476,7 @@ router.route('/delOrder').post(function (req, res) {
     //console.log(req.body)
     let sql =  `update sq_order set doctor_see=false where id=?`;
     
-    param = [req.body.id];
+    let param =  [req.body.id];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -502,7 +502,7 @@ router.route('/cancelOrder').post(function (req, res) {
     //console.log(req.body)
     let sql =  `update sq_order set order_cancel='true' where id=?`;
     
-    param = [req.body.id];
+    let param =  [req.body.id];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})

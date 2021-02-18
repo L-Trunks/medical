@@ -3,7 +3,7 @@
         <el-row :gutter="10">
             <el-col :xs="20" :sm="10" :md="8">
                 <div class="logo">  
-                    <span class="logo_prefix">社区医疗直通车</span><span class="logo_suffix">后台管理系统</span>
+                    <span class="logo_prefix">钟医生智慧医疗</span><span class="logo_suffix">后台管理系统</span>
                 </div>
             </el-col>
             <el-col class="hidden-xs-only"  :sm="8" :md="12">

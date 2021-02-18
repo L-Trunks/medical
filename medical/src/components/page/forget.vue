@@ -68,7 +68,7 @@
                                         type: 'success'
                                     });
                                     
-                                    this.$router.push('/sqztc');
+                                    this.$router.push('/medical');
                                 } else {
                                     this.$message({
                                         message:  "修改失败",

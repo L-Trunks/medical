@@ -32,7 +32,7 @@ Vue.use(Router)
 
 const routes =  [
     {
-      path: '/sqztc',
+      path: '/medical',
       component: index, //主页
       children:[        //子页
         {
@@ -40,60 +40,60 @@ const routes =  [
           component:healthy
         },
         {
-          path:'/sqztc/healthy',
+          path:'/medical/healthy',
           name:'healthy',
           component:healthy
         },
         {
-          path:'/sqztc/family',
+          path:'/medical/family',
           name:'family',
           component:family
         },
         {
-          path:'/sqztc/addPerson',
+          path:'/medical/addPerson',
           component:addPerson
         },
         {
-          path:'/sqztc/updatePerson',
+          path:'/medical/updatePerson',
           component:updatePerson
         },
         {
-          path:'/sqztc/chatList',
+          path:'/medical/chatList',
           name:'chatList',
           component:chatList
         },
         {
-          path:'/sqztc/consult',
+          path:'/medical/consult',
           name:'consult',
           component:consult
         },
         
         {
-          path:'/sqztc/article',
+          path:'/medical/article',
           component:article
         },
         {
-          path:'/sqztc/chatContent',
+          path:'/medical/chatContent',
           component:chatContent
         },
         {
-          path:'/sqztc/orderList',
+          path:'/medical/orderList',
           name:'orderList',
           component:orderList
         },
         {
-          path:'/sqztc/addOrder',
+          path:'/medical/addOrder',
           name:'addOrder',
           component:addOrder
         },
         {
-          path:'/sqztc/myOrderList',
+          path:'/medical/myOrderList',
           name:'myOrderList',
           component:myOrderList
         },
 
         {
-          path:'/sqztc/search',
+          path:'/medical/search',
           component:search,
           children:[        //子页
             {
@@ -105,27 +105,27 @@ const routes =  [
         },
        ]
     },{
-      path: '/sqztc/register',//注册页
+      path: '/medical/register',//注册页
       component: register,
       name: '注册'
      
     },
     {
-      path:'/sqztc/forget',
+      path:'/medical/forget',
       name:'forget',
       component:forget
     },{
-      path: '/sqztc/login',
+      path: '/medical/login',
       component: login,//登录页
       name: '登录'
      
     },{
-      path: '/sqztc/DLogin',
+      path: '/medical/DLogin',
       component: DLogin,//登录页
       name: '登录'
      
     },{
-      path: '/sqztc/setting',//设置页
+      path: '/medical/setting',//设置页
       component: setting,
       children:[        //子页
         {
@@ -133,12 +133,12 @@ const routes =  [
           component:me
         },
         {
-          path:'/sqztc/setting/me',
+          path:'/medical/setting/me',
           name:'me',
           component:me
         },
         {
-          path:'/sqztc/setting/del',
+          path:'/medical/setting/del',
           component:del
         },
       ]
@@ -152,22 +152,22 @@ const router = new Router({
 });
 //这个是请求页面路由的时候会验证cookie存不存在，不存在的话会到登录页
 router.beforeEach((to, from, next) => {
-  if (to.path.startsWith('/sqztc/login')) {
+  if (to.path.startsWith('/medical/login')) {
     delCookie('username');
     delCookie('userType');
     next()
-  }else if(to.path.startsWith('/sqztc/register')){
+  }else if(to.path.startsWith('/medical/register')){
     next()
-  }else if(to.path.startsWith('/sqztc/forget')){
+  }else if(to.path.startsWith('/medical/forget')){
     next()
-  }else if(to.path.startsWith('/sqztc/DLogin')){
+  }else if(to.path.startsWith('/medical/DLogin')){
     delCookie('username');
     delCookie('userType');
     next()
   } else {
     let user = getCookie('username');
     if (!user) {
-      next({path: '/sqztc/login'})
+      next({path: '/medical/login'})
     } else {
       next()
     }

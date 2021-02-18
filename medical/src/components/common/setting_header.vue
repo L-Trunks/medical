@@ -30,7 +30,7 @@
             return {
                 name: 'header',
                 searchValue:'',
-                face:'../../../static/img/user.jpg',
+                face:'../../../static/img/user2.png',
                 show:false
             }
         },
@@ -44,10 +44,10 @@
         },
         methods:{
             chatList(){
-                this.$router.push("/sqztc/chatList");
+                this.$router.push("/medical/chatList");
             },
             close(){
-                this.$router.push("/sqztc");
+                this.$router.push("/medical");
             },
             
             dll(){

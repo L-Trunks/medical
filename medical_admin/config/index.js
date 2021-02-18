@@ -47,7 +47,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'sqztcAdmin/static',
+    assetsSubDirectory: 'medicalAdmin/static',
     assetsPublicPath: '/',
 
     /**

@@ -4,7 +4,7 @@
 
         <div class="login-content">
           <div class="login-face">
-            <img src="../../../static/img/user.jpg" />
+            <img src="../../../static/img/user2.png" />
           </div>
           <div class="login-body">
             <el-form ref="loginForm" :model="loginForm" :rules="rules">
@@ -88,7 +88,7 @@
                     
                       this.setCookie('userface',res[0].face,expireDays);
 
-                      this.$router.push('/sqztc');
+                      this.$router.push('/medical');
                       
                   }
                 });
@@ -96,7 +96,7 @@
         });
       },
       forget(){
-        this.$router.push({path:'/sqztc/forget',query:{updateType:'2'}});
+        this.$router.push({path:'/medical/forget',query:{updateType:'2'}});
       }
     }
   };

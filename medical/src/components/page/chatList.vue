@@ -2,7 +2,7 @@
     <div>
         <h3>咨询记录</h3>
         <div class="chatList_wrap">
-            <div class="acticle" @click="chatDetail(item.record_group_id,item.send)" v-for="item in chatList">
+            <div class="acticle" :key="index" @click="chatDetail(item.record_group_id,item.send)" v-for="(item,index) in chatList">
                 <div class="user_img">
                     <img :src="item.face" alt="头像">
                 </div>

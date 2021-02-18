@@ -43,89 +43,89 @@ Vue.use(Router)
 
 const routes = [
     {
-      path: '/sqztcAdmin/index',
+      path: '/medicalAdmin/index',
       name:'登录',
       component:index
     },
     {
-      path: '/sqztcAdmin',
+      path: '/medicalAdmin',
       component: Home,
-      redirect: '/sqztcAdmin/DashBoard',
+      redirect: '/medicalAdmin/DashBoard',
       children:[
         {
-          path:'/sqztcAdmin/DashBoard',
+          path:'/medicalAdmin/DashBoard',
           component:DashBoard
         },{
-          path:'/sqztcAdmin/websiteScroll',
+          path:'/medicalAdmin/websiteScroll',
           component:websiteScroll
         },{
-          path:'/sqztcAdmin/shopScroll',
+          path:'/medicalAdmin/shopScroll',
           component:shopScroll
         },{
-          path:'/sqztcAdmin/commonTel',
+          path:'/medicalAdmin/commonTel',
           component:commonTel
         },{
-          path:'/sqztcAdmin/doctorsList',
+          path:'/medicalAdmin/doctorsList',
           component:doctorsList
         },{
-          path:'/sqztcAdmin/healthyZhishi',
+          path:'/medicalAdmin/healthyZhishi',
           component:healthyZhishi
         },{
-          path:'/sqztcAdmin/orderList',
+          path:'/medicalAdmin/orderList',
           component:orderList
         },{
-          path:'/sqztcAdmin/addPhone',
+          path:'/medicalAdmin/addPhone',
           component:addPhone
         },{
-          path:'/sqztcAdmin/updatePhone',
+          path:'/medicalAdmin/updatePhone',
           component:updatePhone
         },{
-          path:'/sqztcAdmin/updateScroll',
+          path:'/medicalAdmin/updateScroll',
           component:updateScroll
         },{
-          path:'/sqztcAdmin/updateWebsiteScroll',
+          path:'/medicalAdmin/updateWebsiteScroll',
           component:updateWebsiteScroll
         },{
-          path:'/sqztcAdmin/addScroll',
+          path:'/medicalAdmin/addScroll',
           component:addScroll
         },{
-          path:'/sqztcAdmin/addWebsiteScroll',
+          path:'/medicalAdmin/addWebsiteScroll',
           component:addWebsiteScroll
         },{
-          path:'/sqztcAdmin/orderStatistic',
+          path:'/medicalAdmin/orderStatistic',
           component:orderStatistic
         },{
-          path:'/sqztcAdmin/healthyToutiao',
+          path:'/medicalAdmin/healthyToutiao',
           component:healthyToutiao
         },{
-          path:'/sqztcAdmin/addArticle',
+          path:'/medicalAdmin/addArticle',
           component:addArticle
         },{
-          path:'/sqztcAdmin/updateArticle',
+          path:'/medicalAdmin/updateArticle',
           component:updateArticle
         },{
-          path:'/sqztcAdmin/updatePassword',
+          path:'/medicalAdmin/updatePassword',
           component:updatePassword
         },{
-          path:'/sqztcAdmin/report',
+          path:'/medicalAdmin/report',
           component:report
         },{
-          path:'/sqztcAdmin/awardSetting',
+          path:'/medicalAdmin/awardSetting',
           component:awardSetting
         },{
-          path:'/sqztcAdmin/addDoctor',
+          path:'/medicalAdmin/addDoctor',
           component:addDoctor
         },{
-          path:'/sqztcAdmin/updateDoctor',
+          path:'/medicalAdmin/updateDoctor',
           component:updateDoctor
         },{
-          path:'/sqztcAdmin/awardGet',
+          path:'/medicalAdmin/awardGet',
           component:awardGet
         },{
-          path:'/sqztcAdmin/AwardStatistic',
+          path:'/medicalAdmin/AwardStatistic',
           component:AwardStatistic
         },{
-          path:'/sqztcAdmin/contact',
+          path:'/medicalAdmin/contact',
           component:contact
         }
 
@@ -138,14 +138,14 @@ const router = new Router({
 });
 //这个是请求页面路由的时候会验证cookie存不存在，不存在的话会到登录页
 router.beforeEach((to, from, next) => {
-    if (to.path.startsWith('/sqztcAdmin/index')) {
+    if (to.path.startsWith('/medicalAdmin/index')) {
       delCookie('admin_user');
       delCookie('id');
       next()
     } else {
       let user = getCookie('admin_user');
       if (!user) {
-        next({path: '/sqztcAdmin/index'})
+        next({path: '/medicalAdmin/index'})
       } else {
         next()
       }

@@ -1,7 +1,7 @@
 <template>
   <el-form ref="account" :model="account" :rules="rules" label-position="left" label-width="0px"
            class="demo-ruleForm login-container">
-    <h3 class="title">社区医疗直通车后台管理系统</h3>
+    <h3 class="title">钟医生智慧医疗后台管理系统</h3>
     <el-form-item prop="p_tel">
       <el-input type="text" v-model="account.p_tel"  placeholder="请输入账号"></el-input>
     </el-form-item>
@@ -65,7 +65,7 @@
                   this.setCookie('admin_user',this.account.p_tel,expireDays);
                   this.setCookie('id',res[0].id,expireDays);
                   
-                  this.$router.push('/sqztcAdmin'); //跳转用户中心页
+                  this.$router.push('/medicalAdmin'); //跳转用户中心页
 
                   
               }

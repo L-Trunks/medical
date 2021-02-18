@@ -3,6 +3,7 @@ const express = require('express')
 const mysql = require('../util/mysql');
 
 var sd = require('silly-datetime');
+const { json } = require('body-parser');
 
 var app = express();
 
@@ -14,7 +15,7 @@ router.route('/startChat').post(function (req, res) {
    
     let sql =  `insert into record_group(id,d_id,p_id,time,chatState,chatPerson) values (?,?,?,?,?,?)`;
     var time = sd.format(new Date());
-    param = [req.body.id,req.body.d_id,req.body.username,time,req.body.radio,req.body.value];
+    let param =  [req.body.id,req.body.d_id,req.body.username,time,req.body.radio,req.body.value];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -42,7 +43,7 @@ router.route('/send').post(function (req, res) {
     let sql =  `insert into record(record_group_id,content,time,receiver,send,face) values (?,?,?,?,?,?)`;
     var time = sd.format(new Date());
    console.log(req.body.face)
-    param = [req.body.record_group_id,req.body.content,time,req.body.receiver,req.body.send,req.body.face];
+    let param =  [req.body.record_group_id,req.body.content,time,req.body.receiver,req.body.send,req.body.face];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -69,7 +70,7 @@ router.route('/getChatContent').post(function (req, res) {
    
     let sql =  `select * from record where record_group_id = ?`;
     var time = sd.format(new Date());
-    param = [req.body.record_group_id];
+    let param =  [req.body.record_group_id];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -94,9 +95,9 @@ router.route('/getChatContent').post(function (req, res) {
 })
 router.route('/order').post(function (req, res) {
     
-    let sql =  `INSERT INTO sqylztc.sq_order (d_id, order_name, order_phone, order_address, order_time, order_situation,send_order) VALUES(?, ?, ?, ?, ?, ?,?); `;
+    let sql =  `INSERT INTO medical.sq_order (d_id, order_name, order_phone, order_address, order_time, order_situation,send_order) VALUES(?, ?, ?, ?, ?, ?,?); `;
     var time = sd.format(new Date());
-    param = [req.body.d_id,req.body.order_name,req.body.order_phone,req.body.order_address,req.body.order_time,req.body.order_situation,req.body.send_order];
+    let param =  [req.body.d_id,req.body.order_name,req.body.order_phone,req.body.order_address,req.body.order_time,req.body.order_situation,req.body.send_order];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -108,7 +109,7 @@ router.route('/order').post(function (req, res) {
         }, function (error, data) {
         connection.release()
         if (error) {
-            console.log({message: '接口order--------sql_ERROR'})
+            console.log({message: '接口order--------sql_ERROR'+JSON.stringify(error)})
             res.send({message: 'ERROR'});
             return
         }else{
@@ -126,7 +127,7 @@ router.route('/getGroupList').post(function (req, res) {
     JOIN (SELECT doctor.d_name,record_group.id,doctor.d_face FROM record_group JOIN doctor ON doctor.d_tel  =record_group.d_id   WHERE p_id=? AND record_group.patientSee=TRUE) roup ON roup.id=record.record_group_id  
     JOIN (SELECT record_group_id,MAX(TIME) TIME FROM record GROUP BY record_group_id) b ON  record.record_group_id=b.record_group_id AND record.time=b.time    GROUP BY record.record_group_id,record.id ,roup.d_name ,roup.d_face 
     `;
-    param = [req.body.username];
+    let param =  [req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -151,11 +152,11 @@ router.route('/getGroupList').post(function (req, res) {
 })
 router.route('/getDoctorGroupList').post(function (req, res) {
     
-    let sql =   `SELECT record.id ,record.record_group_id,record.receiver,record.send,record.content,record.time,record.state,roup.p_name NAME,roup.p_face face FROM sqylztc.record 
-    JOIN (SELECT patient.p_name,record_group.id,patient.p_face FROM sqylztc.record_group JOIN patient ON patient.p_tel  =record_group.p_id   WHERE record_group.d_id=? AND record_group.doctorSee=TRUE) roup ON roup.id=record.record_group_id   
-    JOIN (SELECT record.record_group_id,MAX(TIME) TIME FROM sqylztc.record WHERE record.receiver=? GROUP BY record.record_group_id) b ON  record.record_group_id=b.record_group_id AND record.time=b.time    
+    let sql =   `SELECT record.id ,record.record_group_id,record.receiver,record.send,record.content,record.time,record.state,roup.p_name NAME,roup.p_face face FROM medical.record 
+    JOIN (SELECT patient.p_name,record_group.id,patient.p_face FROM medical.record_group JOIN patient ON patient.p_tel  =record_group.p_id   WHERE record_group.d_id=? AND record_group.doctorSee=TRUE) roup ON roup.id=record.record_group_id   
+    JOIN (SELECT record.record_group_id,MAX(TIME) TIME FROM medical.record WHERE record.receiver=? GROUP BY record.record_group_id) b ON  record.record_group_id=b.record_group_id AND record.time=b.time    
     GROUP BY record.record_group_id,record.id ,roup.p_name ,roup.p_name,roup.p_face`;
-    param = [req.body.username,req.body.username];
+    let param =  [req.body.username,req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -185,7 +186,7 @@ router.route('/getGroupState').post(function (req, res) {
     JOIN (SELECT doctor.d_name,record_group.id,doctor.d_face FROM record_group JOIN doctor ON doctor.d_tel  =record_group.d_id   WHERE p_id=? ) roup ON roup.id=record.record_group_id  
     JOIN (SELECT record_group_id,MAX(time) time FROM record WHERE record.receiver=? GROUP BY record_group_id) b ON  record.record_group_id=b.record_group_id AND record.time=b.time   
      GROUP BY record.record_group_id,roup.d_name,roup.d_face,record.id`;
-    param = [req.body.username,req.body.username];
+    let param =  [req.body.username,req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -215,7 +216,7 @@ router.route('/getDoctorGroupState').post(function (req, res) {
     JOIN (SELECT doctor.d_name,record_group.id,doctor.d_face FROM record_group JOIN doctor ON doctor.d_tel  =record_group.d_id   WHERE d_tel=? ) roup ON roup.id=record.record_group_id  
     JOIN (SELECT record_group_id,MAX(time) time FROM record WHERE record.receiver=? GROUP BY record_group_id) b ON  record.record_group_id=b.record_group_id AND record.time=b.time   
      GROUP BY record.record_group_id,record.id,roup.d_name,roup.d_face`;
-    param = [req.body.username,req.body.username];
+    let param =  [req.body.username,req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -242,7 +243,7 @@ router.route('/getDoctorGroupState').post(function (req, res) {
 router.route('/getState').post(function (req, res) {
    
     let sql =  `SELECT COUNT(1) count FROM record WHERE receiver =? AND state='false'`;
-    param = [req.body.username];
+    let param =  [req.body.username];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -277,7 +278,7 @@ router.route('/delChatRecord').post(function (req, res) {
         sql =  `update record_group set doctorSee = false where id=?`;
         //console.log(2)
     }
-    param = [req.body.record_group_id];
+    let param =  [req.body.record_group_id];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -306,7 +307,7 @@ router.route('/getPatientInfo').post(function (req, res) {
     let sql;
     sql =  `SELECT patientgroup.* ,record_group.chatState FROM patientgroup JOIN record_group ON patientgroup.id=record_group.chatPerson WHERE record_group.id=?`;
     
-    param = [req.body.record_group_id];
+    let param =  [req.body.record_group_id];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -333,7 +334,7 @@ router.route('/getPatientInfo').post(function (req, res) {
 router.route('/changeState').post(function (req, res) {
     
     let sql =  `UPDATE record SET state='true' WHERE record_group_id=? and receiver=?`;
-    param = [req.body.record_group_id,req.body.receiver];
+    let param =  [req.body.record_group_id,req.body.receiver];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})
@@ -359,7 +360,7 @@ router.route('/changeState').post(function (req, res) {
 router.route('/selectState').post(function (req, res) {
     
     let sql =  `SELECT state FROM record  WHERE receiver = ? ORDER BY TIME DESC LIMIT 1`;
-    param = [req.body.receiver];
+    let param =  [req.body.receiver];
     mysql.pool.getConnection(function (error, connection) {
         if (error) {
         console.log({message: '连接数据库失败'})

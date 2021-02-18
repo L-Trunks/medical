@@ -40,7 +40,7 @@
                            
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item>
-                                    <router-link class="a" to="/sqztc/setting">
+                                    <router-link class="a" to="/medical/setting">
                                         <div class="setting-div">
                                             <i class="iconfont icon-shezhi"></i>
                                             <span class="setting-string"> 设置</span>
@@ -78,7 +78,7 @@
             return {
                 name: 'header',
                 searchValue:'',
-                face:'../../../static/img/user.jpg',
+                face:'../../../static/img/user2.png',
                 show:false,
                 loginState:false,
                 chatWacth:true
@@ -119,12 +119,12 @@
                 });
             },
             chatList(){
-                this.$router.push("/sqztc/chatList");
+                this.$router.push("/medical/chatList");
             },
             blog(){
             },
             login(){
-                this.$router.push("/sqztc/login");
+                this.$router.push("/medical/login");
             },
             dll(){
                 if(store.state.show){

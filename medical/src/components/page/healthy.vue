@@ -2,7 +2,7 @@
     <div class="healthy">
         <el-tabs v-model="activeName">
             <el-tab-pane label="健康头条" name="first">
-                <div class="article_wrap" v-for="item in toutiaoList">
+                <div class="article_wrap" :key="index" v-for="(item,index) in toutiaoList">
                     <div class="acticle" @click="toutiaoDetail(item.n_id)">
                         <el-row :gutter="20">
                             <el-col :xs="24" :sm="8" :md="8" :lg="8">
@@ -35,7 +35,7 @@
                 </span>
             </el-tab-pane>
             <el-tab-pane label="医疗知识" name="second">
-                <div class="article_wrap" v-for="item in zhishiList">
+                <div class="article_wrap" :key="index" v-for="(item,index) in zhishiList">
                     <div class="acticle" @click="yiliaoDetail(item.n_id)">
                         <el-row :gutter="20">
                             <el-col :xs="24" :sm="8" :md="8" :lg="8">
@@ -134,12 +134,12 @@
             },
             toutiaoDetail(id) {
                 if(id !== undefined) {
-                    this.$router.push({path:'/sqztc/article',query:{id:id}});
+                    this.$router.push({path:'/medical/article',query:{id:id}});
                 }
             },
             yiliaoDetail(id) {
                 if(id !== undefined) {
-                    this.$router.push({path:'/sqztc/article',query:{id:id}});
+                    this.$router.push({path:'/medical/article',query:{id:id}});
                 }
             },
             toutiaoInfo(){

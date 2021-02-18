@@ -4,7 +4,7 @@
 
         <div class="login-content">
           <div class="login-face">
-            <img src="../../../static/img/user.jpg" />
+            <img src="../../../static/img/user2.png" />
           </div>
           <div class="login-body">
             <el-form ref="loginForm" :model="loginForm" :rules="rules">
@@ -62,7 +62,7 @@
     methods: {
       forget(){
        
-        this.$router.push({path:'/sqztc/forget',query:{updateType:'1'}});
+        this.$router.push({path:'/medical/forget',query:{updateType:'1'}});
       },
       login(){
         var qs = require('qs');
@@ -95,7 +95,7 @@
                         console.log(res[0].face)
                         console.log(this.getCookie('userface'))
 
-                        this.$router.push('/sqztc');
+                        this.$router.push('/medical/healthy');
 
                         
                     }
