@@ -15,42 +15,33 @@
             <el-col class="hidden-xs-only" :sm="2" :md="2">
                 <div class="header-right">
                     <el-dropdown menu-align="start"  >
-                        <span >
+                        <span>
                             <el-badge class="item">
                                 <i class="el-icon-date"></i>
                             </el-badge>
                         </span>
-                        
                     </el-dropdown>
                 </div>
             </el-col>
-
             <el-col :xs="4" :sm="4" :md="2">
                 <div class="user-header">
                     <el-dropdown trigger="click" menu-align="start">
-                        <img src="../../../static/images/b_header.jpg" width="50px" />
+                        <img src="http://localhost:4000/upload/1613613092153.jpg" width="50px" />
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item >
                                 <div class="setting-div" @click="updatePassword">
                                     <span class="setting-icon"><i style="font-size: 16px;color: #666;" class="material-icons">settings</i></span> 
                                     <span class="setting-string"> 修改密码</span>
                                 </div>
-                            
                             </el-dropdown-item>
                             <el-dropdown-item divided>
                                 <div class="setting-div" @click="outgo">
                                     <span class="setting-icon"><i style="font-size: 16px;color: #666;" class="material-icons">assignment_return</i></span> 
                                     <span class="setting-string"> 退出</span>
                                 </div>
-                                
                             </el-dropdown-item>
-                            
                         </el-dropdown-menu>
                     </el-dropdown>
-
-                    
-
-
                 </div>
             </el-col>
         </el-row>

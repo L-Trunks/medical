@@ -143,38 +143,27 @@
             info.record_group_id= this.$route.query.record_group_id;
             info.receiver= this.getCookie('username');
             this.$post('http://localhost:4000/getChatContent',qs.stringify(info)).then(res => {
-                
-
-
                 for(var i = 0;i<res.length;i++){
                     if(res[i].send == this.getCookie('username')){
                         res[i].classState = true;
                     }else{
                         res[i].classState = false;
                     }
-                    
-                    
                 }
                 this.chatContent = res;
                 //console.log(this.chatContent)
-                
-
-
             // console.log(res)
             });
             this.$post('http://localhost:4000/changeState',qs.stringify(info)).then(res => {
-                
                 //console.log(res.message)
             });
             this.$post('http://localhost:4000/getPatientInfo',qs.stringify(info)).then(res => {
-                
                 //console.log(res[0].chatState)
                 if(res[0].chatState == '1'){
                     this.form.name = '匿名用户'
                 }else{
                     this.form.name = res[0].name;
                 }
-                
                 this.form.age = res[0].age;
                 this.form.height = res[0].height;
                 this.form.weight = res[0].weight;
@@ -182,7 +171,6 @@
                 this.form.sex = res[0].sex;
                 this.form.profession = res[0].profession;
             });
-        
         },
         
         send(){

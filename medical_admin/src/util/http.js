@@ -1,6 +1,6 @@
 import axios from 'axios';
 import router from '../router'
-import {getCookie} from './util'
+import { getCookie } from './util'
 
 // axios 配置
 axios.defaults.timeout = 5000;
@@ -12,10 +12,10 @@ axios.interceptors.request.use(
         const token = getCookie('session');
         //config.data = JSON.stringify(config.data);
         config.headers = {
-            'Content-Type':'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'
         };
         if (token) {
-            config.params = {'token': token}
+            config.params = { 'token': token }
         }
         return config;
     },
@@ -28,10 +28,10 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
     response => {
-        if(response.data.errCode == 2) {
+        if (response.data.errCode == 2) {
             router.push({
                 path: '/',
-                query: {redirect: router.currentRoute.fullPath}  //从哪个页面跳转
+                query: { redirect: router.currentRoute.fullPath }  //从哪个页面跳转
             })
         }
         return response;
@@ -65,12 +65,12 @@ export function fetch(url, params = {}) {
         axios.get(url, {
             params: params
         })
-        .then(response => {
-            resolve(response.data);
-        })
-        .catch(err => {
-            reject(err)
-        })
+            .then(response => {
+                resolve(response.data);
+            })
+            .catch(err => {
+                reject(err)
+            })
     })
 }
 
