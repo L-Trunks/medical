@@ -15,7 +15,7 @@
 
             </div>
             <div class="share">
-                <share :config="config"></share>
+                <!-- <share :config="config"></share> -->
             </div>
             
         </div>
